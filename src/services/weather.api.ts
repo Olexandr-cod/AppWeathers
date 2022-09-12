@@ -9,7 +9,7 @@ const baseURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon
 export const getWeather = async () => {
   try {
     const result = await axios.get(`${baseURL}`);
-    return result.data;
+    return result;
   } catch (err) {
     console.error(err);
   }

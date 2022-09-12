@@ -1,34 +1,65 @@
-import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
-// import {useNavigation} from '@react-navigation/native';
+import moment from 'moment';
+import React, {useEffect, useCallback} from 'react';
+import {Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import Loader from '../../components/UI/Loader/Loader';
+import WeatherHeader from '../../components/Weather/WeatherHeader';
+import {useNavigation} from '@react-navigation/native';
+import {WeatherRequestAction} from '../../redux/action/WeatherAction';
+import {RootState} from '../../redux/reducers/rootReducer';
+import styles from './styles';
 
-import axios from 'axios';
-
-const keyWeather = 'fc731a1596851bf216c2914bf0a2f0ef';
-const lat = 50.431;
-const lon = 30.517023;
-
-const baseURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${keyWeather}`;
 const WeatherScreen: React.FC = () => {
-  // const navigation = useNavigation<any>();
+  const navigation = useNavigation<any>();
+  const dispatch = useDispatch<any>();
+  const city = useSelector(
+    (state: RootState) => state.weather.weather?.weather.city.name,
+  );
+  const weather = useSelector(
+    (state: RootState) => state.weather.weather?.weather,
+  );
+  const loading = useSelector((state: RootState) => state.weather?.loading);
+  const error = useSelector((state: RootState) => state.weather?.error);
 
   useEffect(() => {
-    getWeather();
-  }, []);
+    dispatch(WeatherRequestAction());
+  }, [dispatch]);
 
-  // console.log('posts----', posts);
-  const getWeather = async () => {
-    try {
-      const result = await axios.get(`${baseURL}`);
-      console.log(result);
-      // return result;
-    } catch (err) {
-      console.error('err', err);
-    }
-  };
+  const MemoizedWeather = useCallback(
+    (item: any) => {
+      return (
+        <TouchableOpacity
+          style={styles.containerCallendar}
+          onPress={() => navigation.navigate('WeatherInfo', item)}>
+          <Text>
+            {moment.unix(item.item.dt).format('dddd')},{' '}
+            {moment(item.item.dt_txt).format('LLL')}
+          </Text>
+        </TouchableOpacity>
+      );
+    },
+    [navigation],
+  );
+
   return (
-    <View>
-      <Text>Weather List</Text>
+    <View style={styles.container}>
+      <WeatherHeader city={city} />
+
+      {loading && <Loader />}
+      {error && (
+        <View>
+          <Text>Error</Text>
+        </View>
+      )}
+
+      {weather && weather.list && (
+        <FlatList
+          data={weather.list}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={item => item.key}
+          renderItem={({item}) => <MemoizedWeather item={item} />}
+        />
+      )}
     </View>
   );
 };
