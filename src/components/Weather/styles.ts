@@ -16,4 +16,13 @@ export default StyleSheet.create({
   titleSelect: {
     fontSize: 20,
   },
+  containerInfoWeather: {
+    padding: 20,
+    backgroundColor: 'gray',
+  },
+  text: {
+    fontSize: 21,
+    color: '#fff',
+    paddingVertical: 5,
+  },
 });
