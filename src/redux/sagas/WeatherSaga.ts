@@ -2,11 +2,7 @@ import {AxiosResponse} from 'axios';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {getWeather} from '../../services/weather.api';
 import {WeatherFailAction, WeatherSuccessAction} from '../action/WeatherAction';
-import {
-  WeatherType,
-  WeatherTypeInfo,
-  WEATHER_REQUEST,
-} from '../action/WeatherActionType';
+import {WeatherTypeInfo, WEATHER_REQUEST} from '../action/WeatherActionType';
 
 function* fetchWeatherSaga() {
   try {
