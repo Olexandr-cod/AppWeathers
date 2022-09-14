@@ -1,10 +1,10 @@
-import {combineReducers} from 'redux';
-import weatherReducer from './WeatherReducer';
+// import {combineReducers} from 'redux';
+// import weatherReducer from './WeatherReducer';
 
-const rootReducer = combineReducers({
-  weather: weatherReducer,
-});
+// const rootReducer = combineReducers({
+//   weather: weatherReducer,
+// });
 
-export type RootState = ReturnType<typeof rootReducer>;
+// export type RootState = ReturnType<typeof rootReducer>;
 
-export default rootReducer;
+// export default rootReducer;

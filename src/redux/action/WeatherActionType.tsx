@@ -1,6 +1,6 @@
-export const WEATHER_REQUEST = 'WEATHER_REQUEST';
-export const WEATHER_FAIL = 'WEATHER_FAIL';
-export const WEATHER_SUCCESS = 'WEATHER_SUCCESS';
+// export const WEATHER_REQUEST = 'WEATHER_REQUEST';
+// export const WEATHER_FAIL = 'WEATHER_FAIL';
+// export const WEATHER_SUCCESS = 'WEATHER_SUCCESS';
 
 export type WeatherType = {
   weather: WeatherTypeInfo[];
@@ -42,22 +42,22 @@ export type WeatherTypeInfo = {
   city: CityInfo[];
 };
 
-export interface WeatherFailPayload {
-  error: string | undefined | unknown | null;
-}
+// export interface WeatherFailPayload {
+//   error: string | undefined | unknown | null;
+// }
 
-export interface WeatherRequest {
-  type: typeof WEATHER_REQUEST;
-}
+// export interface WeatherRequest {
+//   type: typeof WEATHER_REQUEST;
+// }
 
-export interface WeatherSuccess {
-  type: typeof WEATHER_SUCCESS;
-  payload: WeatherType;
-}
+// export interface WeatherSuccess {
+//   type: typeof WEATHER_SUCCESS;
+//   payload: WeatherType;
+// }
 
-export interface WeatherFail {
-  type: typeof WEATHER_FAIL;
-  payload: WeatherFailPayload;
-}
+// export interface WeatherFail {
+//   type: typeof WEATHER_FAIL;
+//   payload: WeatherFailPayload;
+// }
 
-export type WeatherActions = WeatherRequest | WeatherSuccess | WeatherFail;
+// export type WeatherActions = WeatherRequest | WeatherSuccess | WeatherFail;
